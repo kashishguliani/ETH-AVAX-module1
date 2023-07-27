@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract RequireAssertRevertExample {
+    uint256 public value;
+
+    // Function to set the value with a requirement
+    function setValueWithRequire(uint256 _newValue) external {
+        // The require statement checks a condition, and if it's false, the transaction reverts.
+        // In this example, we require the new value to be greater than 10.
+        require(_newValue > 10, "New value must be greater than 10");
+        value = _newValue;
+    }
+
+    // Function to set the value with an assertion
+    function setValueWithAssert(uint256 _newValue) external {
+        // The assert statement checks a condition, and if it's false, the contract reverts with an error.
+        // In this example, we assert that the new value is not zero.
+        assert(_newValue != 0);
+        value = _newValue;
+    }
+
+    // Function to set the value and explicitly revert on failure
+    function setValueWithRevert(uint256 _newValue) external {
+        // The revert statement allows the contract to explicitly revert with a custom error message.
+        // In this example, we revert with a custom message if the new value is divisible by 5.
+        if (_newValue % 5 == 0) {
+            revert("New value cannot be divisible by 5");
+        }
+        value = _newValue;
+    }
+}
